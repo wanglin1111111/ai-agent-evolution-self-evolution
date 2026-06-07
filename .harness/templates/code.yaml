@@ -1,0 +1,61 @@
+name: 代码审查工作流
+description: 代码检查 → 安全审查 → 性能分析 → 优化建议
+version: 1.0.0
+
+steps:
+  - id: lint
+    name: 代码规范检查
+    description: 检查代码风格和规范
+    action: lint_code
+    tools:
+      - code-review
+    output: lint_report
+    
+  - id: security
+    name: 安全审查
+    description: 扫描安全漏洞
+    action: security_scan
+    tools:
+      - code-review
+    input: lint_report
+    depends_on: [lint]
+    output: security_issues
+    
+  - id: test
+    name: 测试执行
+    description: 运行单元测试
+    action: run_tests
+    tools:
+      - Code
+    depends_on: [lint]
+    output: test_results
+    
+  - id: performance
+    name: 性能分析
+    description: 分析性能瓶颈
+    action: analyze_performance
+    tools:
+      - code-review
+    input: lint_report
+    depends_on: [lint]
+    output: performance_report
+    
+  - id: review
+    name: 综合审查
+    description: 整合所有审查结果
+    action: comprehensive_review
+    tools:
+      - code-review
+    input: [security_issues, test_results, performance_report]
+    depends_on: [security, test, performance]
+    output: review_summary
+    
+  - id: optimize
+    name: 优化建议
+    description: 提出优化方案
+    action: suggest_optimizations
+    tools:
+      - Code
+    input: review_summary
+    depends_on: [review]
+    output: optimization_plan

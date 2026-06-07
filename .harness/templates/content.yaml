@@ -1,0 +1,56 @@
+name: 内容创作工作流
+description: 选题研究 → 大纲设计 → 内容创作 → 多平台适配
+version: 1.0.0
+
+steps:
+  - id: research
+    name: 热点研究
+    description: 搜索当前趋势和热点
+    action: research_topics
+    tools:
+      - step-search
+      - WebSearch
+    output: topic_ideas
+    
+  - id: outline
+    name: 大纲设计
+    description: 设计内容结构和框架
+    action: design_outline
+    tools:
+      - content-writer
+    input: topic_ideas
+    depends_on: [research]
+    output: outline
+    
+  - id: draft
+    name: 内容草稿
+    description: 撰写初稿内容
+    action: write_draft
+    tools:
+      - content-writer
+      - wechat-article-pro
+    input: outline
+    depends_on: [outline]
+    output: draft
+    
+  - id: optimize
+    name: 多平台优化
+    description: 针对不同平台优化内容
+    action: optimize_platforms
+    tools:
+      - xiaohongshu-content-creator
+      - content-writer
+    input: draft
+    depends_on: [draft]
+    output: optimized_content
+    
+  - id: deliver
+    name: 内容交付
+    description: 生成最终内容文件
+    action: deliver
+    tools:
+      - Write
+      - docx
+    input: optimized_content
+    depends_on: [optimize]
+    output: final_content

@@ -1,0 +1,58 @@
+# StepFun Harness 智能路由规则
+
+rules:
+  # 简单任务：直接执行
+  - match:
+      complexity: simple
+    action: direct
+    max_skills: 1
+    
+  # 中等任务：单技能
+  - match:
+      complexity: medium
+      skills_required: 1
+    action: single_skill
+    
+  # 复杂任务：多技能编排
+  - match:
+      complexity: complex
+      skills_required: ">1"
+    action: orchestrate
+    
+  # 数据分析任务
+  - match:
+      task_type: analysis
+    template: analysis.yaml
+    skills:
+      - stock-deep-analysis
+      - xlsx
+      
+  # 内容创作任务
+  - match:
+      task_type: content
+    template: content.yaml
+    skills:
+      - content-writer
+      - xiaohongshu-content-creator
+      
+  # 代码任务
+  - match:
+      task_type: code
+    template: code.yaml
+    skills:
+      - Code
+      - code-review
+
+# 成本优化
+cost_optimization:
+  prefer_local: true
+  cache_results: true
+  max_retries: 2
+  token_budget: 0.7
+
+# 技能优先级（用于冲突解决）
+skill_priority:
+  - stepfun-harness
+  - ai-methodology-skills
+  - stock-deep-analysis
+  - xlsx

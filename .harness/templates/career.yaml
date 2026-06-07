@@ -1,0 +1,49 @@
+name: 求职辅导工作流
+description: 简历诊断 → 岗位搜索 → 简历优化 → 面试准备
+version: 1.0.0
+
+steps:
+  - id: diagnose
+    name: 简历诊断
+    description: 分析当前简历，识别改进点
+    action: diagnose_resume
+    tools:
+      - zhide-offer
+    output: resume_feedback
+    
+  - id: search
+    name: 岗位搜索
+    description: 搜索匹配岗位
+    action: search_jobs
+    tools:
+      - zhide-offer
+    depends_on: [diagnose]
+    output: job_listings
+    
+  - id: optimize
+    name: 简历优化
+    description: 根据岗位需求改写简历
+    action: optimize_resume
+    tools:
+      - zhide-offer
+      - docx
+    input: [resume_feedback, job_listings]
+    depends_on: [diagnose, search]
+    output: optimized_resume
+    
+  - id: prepare
+    name: 面试准备
+    description: 准备面试问题和策略
+    action: prepare_interview
+    tools:
+      - zhide-offer
+    input: job_listings
+    depends_on: [search]
+    output: interview_guide
+    
+  - id: deliver
+    name: 交付成果
+    description: 整合所有求职材料
+    action: deliver
+    depends_on: [optimize, prepare]
+    output: job_application_package

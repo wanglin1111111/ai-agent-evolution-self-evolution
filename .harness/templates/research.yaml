@@ -1,0 +1,56 @@
+name: 学术研究工作流
+description: 文献调研 → 研究设计 → 分析验证 → 报告撰写
+version: 1.0.0
+
+steps:
+  - id: literature
+    name: 文献调研
+    description: 搜索和整理相关文献
+    action: survey_literature
+    tools:
+      - step-search
+    output: literature_review
+    
+  - id: methodology
+    name: 方法论设计
+    description: 设计研究方法论
+    action: design_methodology
+    tools:
+      - writing-plans
+    input: literature_review
+    depends_on: [literature]
+    output: methodology
+    
+  - id: analysis
+    name: 数据分析
+    description: 执行数据分析
+    action: analyze_data
+    tools:
+      - quant-invest-analysis
+    depends_on: [methodology]
+    output: analysis_results
+    
+  - id: validation
+    name: 结果验证
+    description: 验证分析结果
+    action: validate_results
+    depends_on: [analysis]
+    output: validated_results
+    
+  - id: writing
+    name: 报告撰写
+    description: 撰写学术报告
+    action: write_report
+    tools:
+      - docx
+      - content-writer
+    input: [validated_results, literature_review]
+    depends_on: [validation, literature]
+    output: academic_paper
+    
+  - id: review
+    name: 同行评审
+    description: 模拟同行评审
+    action: peer_review
+    depends_on: [writing]
+    output: review_feedback

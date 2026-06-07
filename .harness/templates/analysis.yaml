@@ -1,0 +1,62 @@
+name: 数据分析工作流
+description: 数据收集 → 分析 → 可视化 → 报告生成
+version: 1.0.0
+
+steps:
+  - id: collect
+    name: 数据收集
+    description: 从数据源获取原始数据
+    action: collect_data
+    tools:
+      - step-search
+      - WebFetch
+    output: raw_data
+    
+  - id: process
+    name: 数据处理
+    description: 清洗和预处理数据
+    action: process_data
+    tools:
+      - python
+    depends_on: [collect]
+    output: processed_data
+    
+  - id: analyze
+    name: 深度分析
+    description: 执行多维度分析
+    action: deep_analysis
+    tools:
+      - stock-deep-analysis
+      - quant-invest-analysis
+    depends_on: [process]
+    output: analysis_report
+    
+  - id: visualize
+    name: 数据可视化
+    description: 生成图表和表格
+    action: visualize
+    tools:
+      - xlsx
+    depends_on: [analyze]
+    output: charts
+    
+  - id: report
+    name: 报告生成
+    description: 整合输出最终报告
+    action: generate_report
+    tools:
+      - market-research-reports
+    input: [analysis_report, charts]
+    depends_on: [analyze, visualize]
+    output: final_report
+    
+  - id: deliver
+    name: 交付输出
+    description: 生成文件并交付
+    action: deliver
+    tools:
+      - ExcelTool
+      - Write
+    input: [final_report, charts]
+    depends_on: [report]
+    output: deliverables

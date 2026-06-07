@@ -1,0 +1,46 @@
+name: "ai-agent-evolution-self-evolution Harness"
+description: 将 StepFun Harness 智能任务分发框架集成到 GitHub 仓库
+version: 1.0.0
+
+# 智能路由配置
+router:
+  mode: smart  # smart | simple | manual
+  cost_optimization: true
+  context_budget: 0.7  # 使用70%上下文窗口
+  
+# 技能映射
+skills_mapping:
+  python:
+    - code-review
+    - Code
+    - market-research-reports
+  docs:
+    - docx
+    - pdf
+    - content-writer
+  data:
+    - xlsx
+    - stock-deep-analysis
+    - quant-invest-analysis
+  ai:
+    - ai-methodology-skills
+    - edge-ai-agent
+    - ai-hardware-design
+
+# 工作流模板路径
+templates_dir: .harness/templates
+
+# 记忆存储
+memory:
+  enabled: true
+  path: .harness/memory
+  retention_days: 90
+
+# 自动化触发
+triggers:
+  - type: issue_comment
+    pattern: "@harness run"
+  - type: push
+    branches: [main, master]
+  - type: pull_request
+    branches: [main, master]

@@ -1,0 +1,12 @@
+{
+  "version": "1.0.0",
+  "entries": [],
+  "stats": {
+    "total_tasks": 0,
+    "success_rate": 0,
+    "avg_execution_time": 0,
+    "avg_token_usage": 0
+  },
+  "skill_performance": {},
+  "task_patterns": {}
+}
