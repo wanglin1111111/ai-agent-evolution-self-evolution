@@ -1,12 +1,21 @@
-# SKILL.md - AI Agent架构演进与自我进化技能
+---
+name: ai-agent-evolution-self-evolution
+description: >
+  AI Agent架构演进、Harness框架本质、自我进化机制、多Agent协作、中国AI生态分析。用户需要理解AI Agent三层架构（模型-Harness-真实世界）、Self-Evolution三阶段（探索-压缩-固化）、Multi-Agent协作原理、Agent爆发双重动因、中国AI生态现状与机会、模型能力演进重塑Agent范式、人类角色重新定义时使用。适用于Agent产品设计、Harness框架选型、Self-Evolution机制设计、Multi-Agent协作架构、中国AI生态分析、Agent Infra层创业机会识别等场景。
+allowed-tools:
+  - web_search
+  - web_fetch
+  - read
+  - write
+  - exec
+license: MIT
+metadata:
+  author: AutoClaw
+  version: "1.0.0"
+  created: "2026-05-24"
+---
 
----
-skill_name: "ai-agent-evolution-self-evolution"
-skill_version: "1.0.0"
-skill_author: "AutoClaw"
-skill_created: "2026-05-24"
-skill_description: "AI Agent架构演进、Harness框架本质、自我进化机制、多Agent协作、中国AI生态分析"
----
+# SKILL.md - AI Agent架构演进与自我进化技能
 
 ## 技能定位
 

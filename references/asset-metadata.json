@@ -1,0 +1,12 @@
+{
+  "$schema": "https://skills.netease.im/schemas/asset-metadata.json",
+  "skillName": "ai-agent-evolution-self-evolution",
+  "version": "1.0.0",
+  "description": "AI Agent架构演进与自我进化知识技能，无外部API依赖",
+  "assets": [],
+  "dependencies": {
+    "apis": [],
+    "packages": []
+  },
+  "notes": "本技能为纯知识/分析框架型技能，不依赖任何外部API或服务。"
+}
