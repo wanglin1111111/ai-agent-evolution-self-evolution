@@ -1,0 +1,13 @@
+name: selftest
+on: [push, pull_request, workflow_dispatch]
+
+jobs:
+  selftest:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Metadata JSON check
+        run: python -c "import json; d=json.load(open('references/asset-metadata.json',encoding='utf-8')); print('metadata OK:', d['skillName'], 'assets:', len(d['assets']))"
