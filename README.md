@@ -32,6 +32,16 @@
     └── asset-metadata.json
 ```
 
+## 自检
+
+纯知识型技能，零外部依赖，无需运行环境。一行自验（校验元数据 JSON 合法）：
+
+```bash
+python -c "import json; d=json.load(open('references/asset-metadata.json',encoding='utf-8')); print('metadata OK:', d['skillName'], 'assets:', len(d['assets']))"
+```
+
+功能验收走 `TEST.md` 的 5 组测试案例（Harness 选型 / 自进化设计 / 多Agent拓扑）。
+
 ## 典型用法
 
 ```yaml
